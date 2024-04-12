@@ -25,6 +25,10 @@ def create_app(test_config=None):
         )
         return response
 
+    @app.route('/hello')
+    def init():
+        return 'hello world'
+
     @app.route('/actors')
     @requires_auth('get:actors')
     def actors():
