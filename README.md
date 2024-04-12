@@ -61,15 +61,27 @@ python3 app.py
 Successful authentication is required to perform various actions.
 This API uses Auth0 to define a set of roles and permissions required for each endpoint as outlined below:
 
+App url: https://render-cloud-example-0t2l.onrender.com/
+Login: https://carrie-capstone-agency.uk.auth0.com/authorize?audience=https://capstone-agency/&response_type=token&client_id=KvDDalEN7XIjgBD8zLBY8hIcSUU4jPhL&redirect_uri=https://render-cloud-example-0t2l.onrender.com/hello
+
 - Casting Assistant
     - Can view actors and movies
+    - Login
+      - Email: assistant@email.com
+      - Password: Tester99!
 - Casting Director
     - All permissions a Casting Assistant has and…
     - Add or delete an actor from the database
     - Modify actors or movies
+    - Login
+      - Email: director@email.com
+      - Password: Tester99!
 - Executive Producer
     - All permissions a Casting Director has and…
     - Add or delete a movie from the database
+    - Login
+      - Email: producer@email.com
+      - Password: Tester99!
 
 
 ### Endpoints and Expected Behaviour
