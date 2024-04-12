@@ -17,3 +17,9 @@ python-editor==1.0.4
 six==1.16.0
 SQLAlchemy==1.4.18
 Werkzeug==2.0.1
+cryptography==2.9.2
+Flask-RESTful==0.3.7
+python-jose-cryptodome
+flask-moment
+flask-wtf
+
