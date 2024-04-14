@@ -46,7 +46,7 @@ def create_app(test_config=None):
 
     @app.route('/movies')
     @requires_auth('get:movies')
-    def movies():
+    def movies(payload):
         movies = Movie.query.all()
 
         if len(movies) == 0:
@@ -98,7 +98,7 @@ def create_app(test_config=None):
 
     @app.route('/actors/create', methods=['POST'])
     @requires_auth('create:actor')
-    def create_actor():
+    def create_actor(payload):
         body = request.get_json()
         try:
             actor = Actor(name=body['name'], age=body['age'], gender=body['gender'])
@@ -115,7 +115,7 @@ def create_app(test_config=None):
 
     @app.route('/movies/create', methods=['POST'])
     @requires_auth('create:movie')
-    def create_movie():
+    def create_movie(payload):
         body = request.get_json()
         title = body.get('title')
         release_date = body.get('release_date')
