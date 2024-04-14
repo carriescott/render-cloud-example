@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, jsonify, abort
+from flask import Flask, request, abort, jsonify
 from models import Actor, Movie, setup_db, db
 from flask_cors import CORS
 import json
@@ -10,7 +10,7 @@ def create_app(test_config=None):
     app = Flask(__name__)
     setup_db(app)
     CORS(app)
-    app.app_context().push()
+#     app.app_context().push()
 
     # CORS Headers
     @app.after_request
@@ -31,12 +31,13 @@ def create_app(test_config=None):
 
     @app.route('/actors')
     @requires_auth('get:actors')
-    def actors():
+    def actors(payload):
         actors = Actor.query.all()
-        actors_long = [actor.long() for actor in actors]
 
         if len(actors) == 0:
             abort(404)
+
+        actors_long = [actor.long() for actor in actors]
 
         return jsonify({
             'success': True,
@@ -47,10 +48,11 @@ def create_app(test_config=None):
     @requires_auth('get:movies')
     def movies():
         movies = Movie.query.all()
-        movies_long = [movie.long() for movie in movies]
 
         if len(movies) == 0:
             abort(404)
+
+        movies_long = [movie.long() for movie in movies]
 
         return jsonify({
             'success': True,
@@ -106,7 +108,8 @@ def create_app(test_config=None):
                         'actor': actor.serialize()
             })
 
-        except:
+        except Exception as e:
+            print(e)
             abort(422)
 
 
@@ -205,11 +208,11 @@ def create_app(test_config=None):
         }), 404
 
     @app.errorhandler(AuthError)
-    def auth_error(error):
+    def auth_error(auth_error):
         return jsonify({
             "success": False,
             "error": 400,
-            "message": error.description
+            "message": auth_error.error['description']
         }), 400
 
     return app

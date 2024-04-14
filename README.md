@@ -37,7 +37,7 @@ pip install -r requirements.txt
 ## Running the App Locally
 **Create a virtual environment** - Once you have the starter file in your project directory, create a virtual environment that will help you keep the Python packages isolated from the ones already installed on your local machine.
 ``` bash
-cd heroku_sample
+cd render-cloud-example
 python3 -m venv myvenv
 source myvenv/bin/activate
 ```
