@@ -9,8 +9,8 @@ from urllib.request import urlopen
 AUTH0_DOMAIN ='carrie-capstone-agency.uk.auth0.com'
 # ALGORITHMS = os.environ.get('ALGORITHMS')
 ALGORITHMS = ['RS256']
-API_AUDIENCE = os.environ.get('API_AUDIENCE')
-# API_AUDIENCE = 'https://capstone-agency/'
+# API_AUDIENCE = os.environ.get('API_AUDIENCE')
+API_AUDIENCE = 'https://capstone-agency/'
 
 class AuthError(Exception):
     def __init__(self, error, status_code):
