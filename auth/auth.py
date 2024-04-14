@@ -7,8 +7,8 @@ from urllib.request import urlopen
 
 AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')
 # AUTH0_DOMAIN ='carrie-capstone-agency.uk.auth0.com'
-ALGORITHMS = os.environ.get('ALGORITHMS')
-# ALGORITHMS = ['RS256']
+# ALGORITHMS = os.environ.get('ALGORITHMS')
+ALGORITHMS = ['RS256']
 API_AUDIENCE = os.environ.get('API_AUDIENCE')
 # API_AUDIENCE = 'https://capstone-agency/'
 
