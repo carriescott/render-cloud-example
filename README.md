@@ -1,9 +1,20 @@
 # Capstone - Agency API
 ## Capstone project for Udacity Full Stack Developer Nanodegree
+The following project models a casting agency that is responsible for creating 
+movies and managing and assigning actors to those movies.
+It hosts a number of different endpoints that allow specific roles within the 
+agency to perform a different actions such as creating,modifying 
+and deleting movie and actor records.
 
-## Getting Setup
+## Project Motivation
+The motivation behind this project was to create an application that challenges me 
+and puts into practice a number of new skills I have learnt from the Udacity Full Stack Developer
+Nanodegree course. 
 
-### Install Postgres
+## Prerequisite
+If you would like to run this project locally please follow the steps below.
+
+### 1. Install Postgres
 The prerequisite to running the app locally is to have a PostgreSQL database available in your local, and the Postgres server must be up and running.
 Verify the Portgres installation, and start the Postgres server using:
 ```bash
@@ -13,18 +24,39 @@ pg_ctl -D /usr/local/var/postgres start
 pg_ctl -D /usr/local/var/postgres stop
 ```
 
-### Installing Dependencies
+### 2. Verify the database
+Open the psql prompt to view the roles, and databases:
+```
+# Open psql prompt
+psql [username]
+# View the available roles
+\du
+# View databases
+\list
+```
+A PostgreSQL database should be available in your Local, and the Postgres server must be up and running.
 
-1. **Python 3.7** - Follow instructions to install the latest version of python for your platform in the [python docs](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python)
+## Running the App Locally
 
-2. **Virtual Environment** - We recommend working within a virtual environment whenever using Python for projects. This keeps your dependencies for each project separate and organized. Instructions for setting up a virual environment for your platform can be found in the [python docs](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
+### 1. Clone Repo
+```
+git clone https://github.com/carriescott/render-cloud-example.git
+```
+### 2. Create a virtual environment
+Create a virtual environment that will help you keep the Python packages isolated from the ones already 
+installed on your local machine.
+```
+cd render-cloud-example
+# OPTIONAL - Create a Virtual environment
+python3 -m venv myvenv
+source myvenv/bin/activate
+```
 
-3. **PIP Dependencies** - Once your virtual environment is setup and running, install the required dependencies by navigating to the `/backend` directory and running:
-
+### 3. Install PIP Dependencies
+Once your virtual environment is set up and running, install the required dependencies by running:
 ```bash
 pip install -r requirements.txt
 ```
-
 #### Key Pip Dependencies
 
 - [Flask](http://flask.pocoo.org/) is a lightweight backend microservices framework. Flask is required to handle requests and responses.
@@ -33,24 +65,23 @@ pip install -r requirements.txt
 
 - [Flask-CORS](https://flask-cors.readthedocs.io/en/latest/#) is the extension we'll use to handle cross-origin requests from our frontend server.
 
-
-## Running the App Locally
-**Create a virtual environment** - Once you have the starter file in your project directory, create a virtual environment that will help you keep the Python packages isolated from the ones already installed on your local machine.
-``` bash
-cd render-cloud-example
-python3 -m venv myvenv
-source myvenv/bin/activate
+### 4. Set up the environment variables
+Change the DATABASE_URL, to reflect your environment.
 ```
-
-**Set up the environment variables**
-``` bash
+# You should have setup.sh and requirements.txt available
 chmod +x setup.sh
 source setup.sh
+# The setup.sh will run the following:
+# export DATABASE_URL="postgresql://postgres@localhost:5432/postgres"
+# export EXCITED="true"
+# Change the DATABASE_URL, as applicable to you.
 echo $DATABASE_URL
+# postgresql://postgres@localhost:5432/postgres
 echo $EXCITED
+# true
 ```
 
-**Run the app**
+### 5. Run the app
 ``` bash
 python3 app.py
 ```
@@ -60,10 +91,6 @@ python3 app.py
 ### Authentication
 Successful authentication is required to perform various actions.
 This API uses Auth0 to define a set of roles and permissions required for each endpoint as outlined below:
-
-App url: https://render-cloud-example-0t2l.onrender.com/
-Login: https://carrie-capstone-agency.uk.auth0.com/authorize?audience=https://capstone-agency/&response_type=token&client_id=KvDDalEN7XIjgBD8zLBY8hIcSUU4jPhL&redirect_uri=https://render-cloud-example-0t2l.onrender.com/hello
-
 - Casting Assistant
     - Can view actors and movies
     - Login
@@ -83,9 +110,17 @@ Login: https://carrie-capstone-agency.uk.auth0.com/authorize?audience=https://ca
       - Email: producer@email.com
       - Password: Tester99!
 
+If you would like to test any of the endpoints outlined in the following section locally you will need to use one
+of the above logins and grab the access token from the URL. You can then use this
+token in the authorisation header for your request by passing it in as a bearer token
+
+Login URL: https://carrie-capstone-agency.uk.auth0.com/authorize?audience=https://capstone-agency/&response_type=token&client_id=KvDDalEN7XIjgBD8zLBY8hIcSUU4jPhL&redirect_uri=https://render-cloud-example-0t2l.onrender.com/hello
 
 ### Endpoints and Expected Behaviour
-Base URL: `https:`
+To test the application in production you will need to use Postman or an equivalent, passing in the 
+access token as described above using the following base url:
+
+Base URL: `https://render-cloud-example-0t2l.onrender.com`
 
 `GET '/actors'`
 

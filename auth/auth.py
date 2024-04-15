@@ -6,11 +6,8 @@ from jose import jwt
 from urllib.request import urlopen
 
 AUTH0_DOMAIN = os.environ['AUTH0_DOMAIN']
-# AUTH0_DOMAIN ='carrie-capstone-agency.uk.auth0.com'
 ALGORITHMS = os.environ['ALGORITHMS']
-# ALGORITHMS = ['RS256']
 API_AUDIENCE = os.environ['API_AUDIENCE']
-# API_AUDIENCE = 'https://capstone-agency/'
 
 class AuthError(Exception):
     def __init__(self, error, status_code):
@@ -50,8 +47,6 @@ def get_token_auth_header():
     return token
 
 def check_permissions(permission, payload):
-    print('permission', permission)
-    print('payload', payload)
     if 'permissions' not in payload:
         raise AuthError({
             'code': 'invalid_claims',
@@ -67,17 +62,11 @@ def check_permissions(permission, payload):
     return True
 
 def verify_decode_jwt(token):
-    print('token', token)
-    print('line 71')
     jsonurl = urlopen(f'https://{AUTH0_DOMAIN}/.well-known/jwks.json')
-    print('jsonurl', jsonurl)
     jwks = json.loads(jsonurl.read())
-    print('jwks', jwks)
     unverified_header = jwt.get_unverified_header(token)
-    print('unverified_header', unverified_header)
     rsa_key = {}
     if 'kid' not in unverified_header:
-        print('kid')
         raise AuthError({
             'code': 'invalid_header',
             'description': 'Authorization malformed.'
@@ -93,7 +82,6 @@ def verify_decode_jwt(token):
                 'e': key['e']
             }
     if rsa_key:
-        print('rsa')
         try:
             payload = jwt.decode(
                 token,
@@ -136,7 +124,6 @@ def requires_auth(permission=''):
             try:
                 payload = verify_decode_jwt(token)
             except Exception as e:
-                print('e', e)
                 abort(401)
             check_permissions(permission, payload)
             return f(payload, *args, **kwargs)

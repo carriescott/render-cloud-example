@@ -5,7 +5,6 @@ from flask_migrate import Migrate
 from datetime import datetime
 import json
 
-# database_path = "postgresql://postgres@localhost:5432/postgres"
 database_path = os.environ['DATABASE_URL']
 if database_path.startswith("postgres://"):
   database_path = database_path.replace("postgres://", "postgresql://", 1)
